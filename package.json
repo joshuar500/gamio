@@ -1,0 +1,27 @@
+{
+  "name": "my-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.3",
+    "parcel-bundler": "^1.9.7",
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "@types/socket.io": "^1.4.36",
+    "@types/socket.io-client": "^1.4.32",
+    "phaser": "^3.11.0",
+    "socket.io": "^2.1.1"
+  }
+}

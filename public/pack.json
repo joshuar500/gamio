@@ -1,0 +1,72 @@
+{
+  "preload": {
+    "files": [
+      {
+        "type": "bitmapFont",
+        "key": "flappyBirdFont",
+        "textureURL": "font/font.png",
+        "fontDataURL": "font/font.fnt"
+      },
+      {
+        "type": "image",
+        "key": "person",
+        "url": "img/character.jpg"
+      },
+      {
+        "type": "image",
+        "key": "otherPlayer",
+        "url": "img/character.jpg"
+      },
+      {
+        "type": "image",
+        "key": "star",
+        "url": "img/star-icon.png"
+      },
+      {
+        "type": "image",
+        "key": "inventoryContainer",
+        "url": "sprites/inventory.png"
+      },
+      {
+        "type": "image",
+        "key": "tiles",
+        "url": "sprites/desert.png"
+      },
+      {
+        "type": "tilemapTiledJSON",
+        "key": "map",
+        "url": "maps/desert.json"
+      },
+      {
+        "type": "spritesheet",
+        "key": "desert_sprites",
+        "url": "sprites/desert.png",
+        "frameConfig": {
+          "frameWidth": 32,
+          "frameHeight": 32,
+          "spacing" : 1
+        }
+      },
+      {
+        "type": "image",
+        "key": "map-tiles",
+        "url": "sprites/atlas.png"
+      },
+      {
+        "type": "tilemapTiledJSON",
+        "key": "rpg-map",
+        "url": "maps/rpg.json"
+      },
+      {
+        "type": "spritesheet",
+        "key": "rpg_sprites",
+        "url": "sprites/atlas.png",
+        "frameConfig": {
+          "frameWidth": 16,
+          "frameHeight": 16,
+          "spacing" : 1
+        }
+      }
+    ]
+  }
+}
