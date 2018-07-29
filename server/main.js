@@ -1,8 +1,16 @@
 var Bundler = require('parcel-bundler');
 var express = require('express');
 var app = express();
+
+if (app.get('env') == 'development') {
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  })
+}
+
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, { path: '/socketio' });
 
 const indexHtml = './client/index.html';
 const options = {};
@@ -61,6 +69,14 @@ io.on('connection', function (socket) {
     star.y = Math.floor(Math.random() * 500) + 50;
     io.emit('starLocation', star);
     io.emit('scoreUpdate', scores);
+  });
+  socket.on('worldItemPlaced', function (itemData) {
+    if (players[itemData.playerId].items) {
+      players[itemData.playerId].items.push(itemData);
+    } else {
+      players[itemData.playerId].items = [itemData];
+    }
+    io.emit('worldItemPlacedUpdate', itemData);
   });
  
   // when a player disconnects, remove them from our players object

@@ -20,7 +20,7 @@ export class Item extends Phaser.GameObjects.Sprite {
     params.scene.add.existing(this);
 
     if (params.itemData) {
-      this.setData({ name: 'Red Gem Stone', level: 2, owner: 'Link', 'gold': 50 });
+      this.setData(params.itemData);
       this.setInteractive();
       this.addItemData(params.itemData);
       this.addItemInputHandler();
@@ -32,8 +32,8 @@ export class Item extends Phaser.GameObjects.Sprite {
     this.text.setText([
       'Name: ' + this.getData('name'),
       'Level: ' + this.getData('level'),
-      'Value: ' + this.getData('gold') + ' gold',
-      'Owner: ' + this.getData('owner')
+      'Value: ' + this.getData('value') + ' monies',
+      'Owner: ' + this.getData('playerId')
     ]);
     this.text.setVisible(false);
   }

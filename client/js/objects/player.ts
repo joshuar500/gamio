@@ -2,11 +2,13 @@ export class Player extends Phaser.GameObjects.Sprite {
   private currentScene: Phaser.Scene;
   private timeElapsed: number;
   private velocity: number;
+  public playerInfo: any;
 
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
 
     this.currentScene = params.scene;
+    this.playerInfo = params.playerInfo;
 
     this.timeElapsed = 0;
     this.velocity = 500;
