@@ -4,7 +4,7 @@ import { Marker } from '../objects/marker';
 
 import { addOtherPlayers, addPlayer, currentPlayers, disconnected,
          placeWorldObject, playerMoved, scoreUpdate, starLocation,
-         addInventory } from './commands/index';
+         addInventory, worldObjectPlaced } from './setup/index';
 
 const io = require('socket.io-client');
 
@@ -31,6 +31,7 @@ export class GameScene extends Phaser.Scene {
   private scoreUpdate: any;
   private starLocation: any;
   private addInventory: any;
+  private worldObjectPlaced: any;
 
   constructor() {
     super({
@@ -45,6 +46,7 @@ export class GameScene extends Phaser.Scene {
     this.playerMoved = playerMoved.bind(this);
     this.scoreUpdate = scoreUpdate.bind(this);
     this.starLocation = starLocation.bind(this);
+    this.worldObjectPlaced = worldObjectPlaced.bind(this);
   }
 
   init(): void {
@@ -158,6 +160,7 @@ export class GameScene extends Phaser.Scene {
     this.socket.on('disconnect', this.disconnected);
     this.socket.on('scoreUpdate', this.scoreUpdate);
     this.socket.on('starLocation', this.starLocation);
+    this.socket.on('worldItemPlacedUpdate', this.worldObjectPlaced);
   }
 
 }

@@ -37,8 +37,10 @@ export class Player extends Phaser.GameObjects.Sprite {
 
   update(time, delta) : void {
 
-    // control the player with keyboard
+    //TODO: play animations
     this.anims.play('person', true);
+
+    // control the player with keyboard
     if (this) {
       let animDir = "";
       let madeAMove = false;

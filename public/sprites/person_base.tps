@@ -214,24 +214,7 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>person/white/0.png</filename>
-            <filename>person/white/1.png</filename>
-            <filename>person/white/2.png</filename>
-            <filename>person/white/3.png</filename>
-            <filename>person/white/4.png</filename>
-            <filename>person/white/5.png</filename>
-            <filename>person/white/6.png</filename>
-            <filename>person/white/7.png</filename>
-            <filename>person/white/8.png</filename>
-            <filename>person/white/9.png</filename>
-            <filename>person/white/10.png</filename>
-            <filename>person/white/11.png</filename>
-            <filename>person/white/12.png</filename>
-            <filename>person/white/13.png</filename>
-            <filename>person/white/14.png</filename>
-            <filename>person/white/15.png</filename>
-            <filename>person/white/16.png</filename>
-            <filename>person/white/17.png</filename>
+            <filename>person/white</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -25,15 +25,4 @@ export function placeWorldObject() {
     // tile.setCollision(true);
     this.socket.emit('worldItemPlaced', { ...itemData, x: this.marker.snappedWorldPoint.x, y: this.marker.snappedWorldPoint.y });
   }, this);
-  
-  this.socket.on('worldItemPlacedUpdate', function(itemData) {
-    new Item({
-      scene: currentScene,
-      x: itemData.x,
-      y: itemData.y,
-      frame: 39,
-      key: "desert_sprites",
-      itemData: itemData
-    })
-  });
 }

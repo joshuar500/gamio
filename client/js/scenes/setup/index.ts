@@ -7,3 +7,4 @@ export * from './placeWorldObject';
 export * from './playerMoved';
 export * from './scoreUpdate';
 export * from './starLocation';
+export * from './worldObjectPlaced';
