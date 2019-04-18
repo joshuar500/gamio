@@ -70,11 +70,12 @@ io.on('connection', function (socket) {
     io.emit('starLocation', star);
     io.emit('scoreUpdate', scores);
   });
+  // when an item is placed into the world, add the item to the player's inventory
   socket.on('worldItemPlaced', function (itemData) {
-    if (players[itemData.playerId].items) {
-      players[itemData.playerId].items.push(itemData);
+    if (players[itemData.playerId].worldItemInventory) {
+      players[itemData.playerId].worldItemInventory.push(itemData);
     } else {
-      players[itemData.playerId].items = [itemData];
+      players[itemData.playerId].worldItemInventory = [itemData];
     }
     io.emit('worldItemPlacedUpdate', itemData);
   });

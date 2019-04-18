@@ -8,9 +8,15 @@
         "fontDataURL": "font/font.fnt"
       },
       {
-        "type": "image",
+        "type": "spritesheet",
         "key": "person",
-        "url": "img/character.jpg"
+        "url": "sprites/base.png",
+        "frameConfig": {
+          "frameWidth": 16,
+          "frameHeight": 16,
+          "spacing" : 1,
+          "endFrame": 19
+        }
       },
       {
         "type": "image",

@@ -41,6 +41,12 @@ export class BootScene extends Phaser.Scene {
 
     // load out package
     this.load.pack("preload", "pack.json", "preload");
+
+    // load out animations
+    this.load.animation("personData", "animations.json");
+
+    // load out atlas's
+    this.load.atlas('persons', 'sprites/person_base/person_base.png', 'sprites/person_base/person_base.json');
   }
 
   update(): void {

@@ -1,8 +1,10 @@
 import { Player } from '../objects/player';
-import { OtherPlayer } from '../objects/otherPlayer';
-import { Item } from '../objects/item';
-import { Inventory } from '../objects/inventory';
+// import { Inventory } from '../objects/inventory';
 import { Marker } from '../objects/marker';
+
+import { addOtherPlayers, addPlayer, currentPlayers, disconnected,
+         placeWorldObject, playerMoved, scoreUpdate, starLocation,
+         addInventory } from './commands/index';
 
 const io = require('socket.io-client');
 
@@ -20,18 +22,29 @@ export class GameScene extends Phaser.Scene {
   private blueScoreText: any;
   private redScoreText: any;
 
+  private currentPlayers: any;
+  private addOtherPlayers: any;
+  private addPlayer: any;
+  private disconnected: any;
+  private placeWorldObject: any;
+  private playerMoved: any;
+  private scoreUpdate: any;
+  private starLocation: any;
+  private addInventory: any;
+
   constructor() {
     super({
       key: 'GameScene'
     });
-    this.currentPlayers = this.currentPlayers.bind(this);
-    this.addPlayer = this.addPlayer.bind(this);
-    this.addOtherPlayers = this.addOtherPlayers.bind(this);
-    this.playerMoved = this.playerMoved.bind(this);
-    this.disconnected = this.disconnected.bind(this);
-    this.scoreUpdate = this.scoreUpdate.bind(this);
-    this.starLocation = this.starLocation.bind(this);
-    this.placeWorldObject = this.placeWorldObject.bind(this);
+    this.addOtherPlayers = addOtherPlayers.bind(this);
+    this.addPlayer = addPlayer.bind(this);
+    this.currentPlayers = currentPlayers.bind(this);
+    this.disconnected = disconnected.bind(this);
+    this.addInventory = addInventory.bind(this);
+    this.placeWorldObject = placeWorldObject.bind(this);
+    this.playerMoved = playerMoved.bind(this);
+    this.scoreUpdate = scoreUpdate.bind(this);
+    this.starLocation = starLocation.bind(this);
   }
 
   init(): void {
@@ -60,12 +73,7 @@ export class GameScene extends Phaser.Scene {
     this.addSockets();
 
     // add inventory
-    new Inventory({
-      scene: this,
-      x: 0,
-      y: 0,
-      key: 'inventoryContainer'
-    });
+    this.addInventory();
 
     this.placeWorldObject();
 
@@ -152,104 +160,4 @@ export class GameScene extends Phaser.Scene {
     this.socket.on('starLocation', this.starLocation);
   }
 
-  starLocation(starLocation) {
-    const { socket, player, physics } = this;
-
-    if (this.star) this.star.destroy();
-    this.star = physics.add.image(starLocation.x, starLocation.y, 'star');
-    physics.add.overlap(player, this.star, function () {
-      socket.emit('starCollected');
-    }, null, this);
-  }
-
-  scoreUpdate(scores) {
-    this.blueScoreText.setText('Blue: ' + scores.blue);
-    this.redScoreText.setText('Red: ' + scores.red);
-  }
-
-  disconnected(playerId) {
-    this.otherPlayers.getChildren().forEach(function (otherPlayer) {
-      if (playerId === otherPlayer.playerId) {
-        otherPlayer.destroy();
-      }
-    });
-  }
-
-  playerMoved(playerInfo) {
-    this.otherPlayers.getChildren().forEach(function (otherPlayer) {
-      if (playerInfo.playerId === otherPlayer.playerId) {
-        otherPlayer.setPosition(playerInfo.x, playerInfo.y);
-      }
-    });
-  }
-
-  currentPlayers(players) {
-    const { socket, addPlayer, addOtherPlayers } = this;
-    Object.keys(players).forEach(function (id) {
-      if (players[id].playerId === socket.id) {
-        addPlayer(players[id]);
-      } else {
-        addOtherPlayers(players[id]);
-      }
-    });
-  }
-
-  addPlayer(playerInfo) {
-    this.player = new Player({
-      scene: this,
-      x: playerInfo.x,
-      y: playerInfo.y,
-      key: 'person',
-      playerInfo: playerInfo
-    });
-  }
-
-  addOtherPlayers(playerInfo) {
-    const otherPlayer = new OtherPlayer({
-      scene: this,
-      x: playerInfo.x,
-      y: playerInfo.y,
-      key: 'otherPlayer',
-      playerInfo: playerInfo
-    })
-    this.otherPlayers.add(otherPlayer);
-  }
-
-  placeWorldObject() {
-    // TODO: if item is selected and item is not over any obstacles (inventory, dialog, house, tree, etc)
-    const currentScene = this;
-    this.input.on('pointerdown', function (pointer) {
-
-      const itemData = {
-        playerId: this.player.playerInfo.playerId,
-        type: 'flower',
-        name: 'cool flower',
-        level: 0,
-        owner: 'playerId1234',
-        value: 12
-      }
-      new Item({
-        scene: this,
-        x: this.marker.snappedWorldPoint.x,
-        y: this.marker.snappedWorldPoint.y,
-        frame: 39,
-        key: "desert_sprites",
-        itemData: itemData
-      });
-      // const tile = this.map.groundLayer.putTileAtWorldXY(6, this.marker.snappedWorldPoint.x, this.marker.snappedWorldPoint.y);
-      // tile.setCollision(true);
-      this.socket.emit('worldItemPlaced', { ...itemData, x: this.marker.snappedWorldPoint.x, y: this.marker.snappedWorldPoint.y });
-    }, this);
-    
-    this.socket.on('worldItemPlacedUpdate', function(itemData) {
-      new Item({
-        scene: currentScene,
-        x: itemData.x,
-        y: itemData.y,
-        frame: 39,
-        key: "desert_sprites",
-        itemData: itemData
-      })
-    });
-  }
 }

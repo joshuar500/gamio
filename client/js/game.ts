@@ -8,7 +8,8 @@
 /// <reference path="./phaser.d.ts"/>
 
 // import "./lib/phaser.min";
-import "./lib/phaser";
+// import "./lib/phaser";
+import 'phaser';
 import { GameScene } from './scenes/gameScene';
 import { BootScene } from "./scenes/bootScene";
 import { MainMenuScene } from "./scenes/mainMenuScene";
@@ -16,8 +17,8 @@ import { MainMenuScene } from "./scenes/mainMenuScene";
 const config: GameConfig = {
     type: Phaser.AUTO,
     parent: 'game',
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
     physics: {
       default: 'arcade',
       arcade: {

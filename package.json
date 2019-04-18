@@ -22,7 +22,8 @@
   "dependencies": {
     "@types/socket.io": "^1.4.36",
     "@types/socket.io-client": "^1.4.32",
-    "phaser": "^3.11.0",
+    "commands": "0.0.7",
+    "phaser": "^3.16.2",
     "socket.io": "^2.1.1"
   }
 }

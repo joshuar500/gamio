@@ -3,8 +3,8 @@ export class Inventory extends Phaser.GameObjects.Sprite {
     super(params.scene, params.x, params.y, params.key, params.frame);
 
     // image
-    this.setScale(1);
-    this.setOrigin(0, 0);
+    this.setScale(2);
+    this.setOrigin(-0.2, -0.1);
     this.setInteractive();
 
     // physics
