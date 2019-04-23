@@ -22,6 +22,8 @@ export class GameScene extends Phaser.Scene {
   private cursors: any;
   private blueScoreText: any;
   private redScoreText: any;
+  private stats: any;
+  // private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
 
   private currentPlayers: any;
   private addOtherPlayers: any;
@@ -46,7 +48,7 @@ export class GameScene extends Phaser.Scene {
     this.addInventory = addInventory.bind(this);
     this.addEvents = addEvents.bind(this);
     this.playerMoved = playerMoved.bind(this);
-    this.scoreUpdate = scoreUpdate.bind(this);
+    // this.scoreUpdate = scoreUpdate.bind(this);
     this.starLocation = starLocation.bind(this);
     this.worldObjectPlaced = worldObjectPlaced.bind(this);
   }
@@ -70,8 +72,8 @@ export class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // add scoreboard
-    this.blueScoreText = this.add.text(16, 16, '', { fontSize: '32px', fill: '#0000FF' });
-    this.redScoreText = this.add.text(584, 16, '', { fontSize: '32px', fill: '#FF0000' });
+    // this.blueScoreText = this.add.text(16, 16, '', { fontSize: '32px', fill: '#0000FF' });
+    // this.redScoreText = this.add.text(584, 16, '', { fontSize: '32px', fill: '#FF0000' });
 
     // add controls
     this.addControls();
@@ -163,7 +165,7 @@ export class GameScene extends Phaser.Scene {
     this.socket.on('newPlayer', this.addOtherPlayers);
     this.socket.on('playerMoved', this.playerMoved);
     this.socket.on('disconnect', this.disconnected);
-    this.socket.on('scoreUpdate', this.scoreUpdate);
+    // this.socket.on('scoreUpdate', this.scoreUpdate);
     this.socket.on('starLocation', this.starLocation);
     this.socket.on('worldItemPlacedUpdate', this.worldObjectPlaced);
   }

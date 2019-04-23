@@ -181,24 +181,24 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">person/white/0.png</key>
-            <key type="filename">person/white/1.png</key>
-            <key type="filename">person/white/10.png</key>
-            <key type="filename">person/white/11.png</key>
-            <key type="filename">person/white/12.png</key>
-            <key type="filename">person/white/13.png</key>
-            <key type="filename">person/white/14.png</key>
-            <key type="filename">person/white/15.png</key>
-            <key type="filename">person/white/16.png</key>
-            <key type="filename">person/white/17.png</key>
-            <key type="filename">person/white/2.png</key>
-            <key type="filename">person/white/3.png</key>
-            <key type="filename">person/white/4.png</key>
-            <key type="filename">person/white/5.png</key>
-            <key type="filename">person/white/6.png</key>
-            <key type="filename">person/white/7.png</key>
-            <key type="filename">person/white/8.png</key>
-            <key type="filename">person/white/9.png</key>
+            <key type="filename">person/person-0/person-0-0.png</key>
+            <key type="filename">person/person-0/person-0-1.png</key>
+            <key type="filename">person/person-0/person-0-10.png</key>
+            <key type="filename">person/person-0/person-0-11.png</key>
+            <key type="filename">person/person-0/person-0-12.png</key>
+            <key type="filename">person/person-0/person-0-13.png</key>
+            <key type="filename">person/person-0/person-0-14.png</key>
+            <key type="filename">person/person-0/person-0-15.png</key>
+            <key type="filename">person/person-0/person-0-16.png</key>
+            <key type="filename">person/person-0/person-0-17.png</key>
+            <key type="filename">person/person-0/person-0-2.png</key>
+            <key type="filename">person/person-0/person-0-3.png</key>
+            <key type="filename">person/person-0/person-0-4.png</key>
+            <key type="filename">person/person-0/person-0-5.png</key>
+            <key type="filename">person/person-0/person-0-6.png</key>
+            <key type="filename">person/person-0/person-0-7.png</key>
+            <key type="filename">person/person-0/person-0-8.png</key>
+            <key type="filename">person/person-0/person-0-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -214,7 +214,7 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>person/white</filename>
+            <filename>person/person-0</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

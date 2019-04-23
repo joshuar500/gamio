@@ -13,6 +13,7 @@ import 'phaser';
 import { GameScene } from './scenes/gameScene';
 import { BootScene } from "./scenes/bootScene";
 import { MainMenuScene } from "./scenes/mainMenuScene";
+import { HudScene } from "./scenes/hudScene";
 
 const config: GameConfig = {
     type: Phaser.AUTO,
@@ -29,7 +30,8 @@ const config: GameConfig = {
     scene: [
       BootScene,
       MainMenuScene,
-      GameScene
+      GameScene,
+      HudScene
     ],
     antialias: false,
     roundPixels: true
