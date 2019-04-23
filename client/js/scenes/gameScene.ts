@@ -3,7 +3,7 @@ import { Player } from '../objects/player';
 import { Marker } from '../objects/marker';
 
 import { addOtherPlayers, addPlayer, currentPlayers, disconnected,
-         placeWorldObject, playerMoved, scoreUpdate, starLocation,
+         addEvents, playerMoved, scoreUpdate, starLocation,
          addInventory, worldObjectPlaced } from './setup/index';
 
 const io = require('socket.io-client');
@@ -18,6 +18,7 @@ export class GameScene extends Phaser.Scene {
   private controls: Phaser.Cameras.Controls.FixedKeyControl;
   private velocity: number;
   private otherPlayers: Phaser.Physics.Arcade.Group;
+  // private items: Phaser.GameObjects.Group;
   private cursors: any;
   private blueScoreText: any;
   private redScoreText: any;
@@ -26,12 +27,13 @@ export class GameScene extends Phaser.Scene {
   private addOtherPlayers: any;
   private addPlayer: any;
   private disconnected: any;
-  private placeWorldObject: any;
+  private addEvents: any;
   private playerMoved: any;
   private scoreUpdate: any;
   private starLocation: any;
   private addInventory: any;
   private worldObjectPlaced: any;
+  private keys: any;
 
   constructor() {
     super({
@@ -42,7 +44,7 @@ export class GameScene extends Phaser.Scene {
     this.currentPlayers = currentPlayers.bind(this);
     this.disconnected = disconnected.bind(this);
     this.addInventory = addInventory.bind(this);
-    this.placeWorldObject = placeWorldObject.bind(this);
+    this.addEvents = addEvents.bind(this);
     this.playerMoved = playerMoved.bind(this);
     this.scoreUpdate = scoreUpdate.bind(this);
     this.starLocation = starLocation.bind(this);
@@ -55,6 +57,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
+    // disable context menu right click
+    this.input.mouse.disableContextMenu();
+
     // create map
     this.createMap();
 
@@ -74,10 +79,11 @@ export class GameScene extends Phaser.Scene {
     this.addMarker();
     this.addSockets();
 
-    // add inventory
+    // add inventory TODO: move to player.ts
     this.addInventory();
 
-    this.placeWorldObject();
+    // add events
+    this.addEvents();
 
     // debug stuff
     this.debug();
@@ -114,8 +120,6 @@ export class GameScene extends Phaser.Scene {
     this.map.objectsLayer = this.map.createDynamicLayer('Objects', tiles, 0, 0);
     this.map.houseLayer = this.map.createDynamicLayer('House', tiles, 0, 0);
 
-    console.log('this.map', this.map);
-
     // add colliding layer
     // this.collidingLayer = this.map.createDynamicLayer('Colliding', tiles, 0, 0);
     // this.collidingLayer.setCollisionByProperty({ collides: true });
@@ -141,6 +145,7 @@ export class GameScene extends Phaser.Scene {
       right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
       down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
       i: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I),
+      shiftKey: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
     };
   }
 

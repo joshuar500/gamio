@@ -10,7 +10,7 @@
       {
         "type": "spritesheet",
         "key": "person",
-        "url": "sprites/base.png",
+        "url": "sprites/person_base/person_base.png",
         "frameConfig": {
           "frameWidth": 16,
           "frameHeight": 16,

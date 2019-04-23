@@ -1,7 +1,7 @@
 {
   "anims": [
-      {
-          "key": "person",
+        {
+          "key": "idle",
           "type": "frame",
           "frames": [
               {
@@ -9,10 +9,31 @@
                   "frame": "0.png",
                   "duration": 0,
                   "visible": false
-              },
+              }
+          ],
+          "frameRate": 8,
+          "duration": 1,
+          "skipMissedFrames": true,
+          "delay": 0,
+          "repeat": -1,
+          "repeatDelay": 0,
+          "yoyo": false,
+          "showOnStart": false,
+          "hideOnComplete": false
+      },
+      {
+          "key": "walk_down",
+          "type": "frame",
+          "frames": [
               {
                   "key": "persons",
                   "frame": "1.png",
+                  "duration": 0,
+                  "visible": false
+              },
+              {
+                  "key": "persons",
+                  "frame": "0.png",
                   "duration": 0,
                   "visible": false
               },
@@ -23,20 +44,28 @@
                   "visible": false
               },
               {
-                  "key": "persons",
-                  "frame": "3.png",
-                  "duration": 0,
-                  "visible": false
-              },
+                "key": "persons",
+                "frame": "0.png",
+                "duration": 0,
+                "visible": false
+              }
+          ],
+          "frameRate": 8,
+          "duration": 1,
+          "skipMissedFrames": false,
+          "delay": 0,
+          "repeat": -1,
+          "repeatDelay": 0,
+          "yoyo": false,
+          "showOnStart": false,
+          "hideOnComplete": false
+      }, {
+        "key": "walk_up",
+          "type": "frame",
+          "frames": [
               {
                   "key": "persons",
-                  "frame": "4.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "5.png",
+                  "frame": "7.png",
                   "duration": 0,
                   "visible": false
               },
@@ -48,67 +77,52 @@
               },
               {
                   "key": "persons",
-                  "frame": "7.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
                   "frame": "8.png",
                   "duration": 0,
                   "visible": false
               },
               {
                   "key": "persons",
-                  "frame": "9.png",
+                  "frame": "6.png",
                   "duration": 0,
                   "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "10.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "11.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "12.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "13.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "14.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                  "key": "persons",
-                  "frame": "15.png",
-                  "duration": 0,
-                  "visible": false
-              },
-              {
-                "key": "persons",
-                "frame": "16.png",
-                "duration": 0,
-                "visible": false
-            }
+              }
           ],
-          "frameRate": 24,
-          "duration": 1.5,
+          "frameRate": 8,
+          "duration": 1,
+          "skipMissedFrames": true,
+          "delay": 0,
+          "repeat": -1,
+          "repeatDelay": 0,
+          "yoyo": false,
+          "showOnStart": false,
+          "hideOnComplete": false
+      },
+      {
+        "key": "walk_left",
+          "type": "frame",
+          "frames": [
+              {
+                  "key": "persons",
+                  "frame": "4.png",
+                  "duration": 0,
+                  "visible": false
+              },
+              {
+                  "key": "persons",
+                  "frame": "3.png",
+                  "duration": 0,
+                  "visible": false
+              },
+              {
+                  "key": "persons",
+                  "frame": "5.png",
+                  "duration": 0,
+                  "visible": false
+              }
+          ],
+          "frameRate": 8,
+          "duration": 1,
           "skipMissedFrames": true,
           "delay": 0,
           "repeat": -1,

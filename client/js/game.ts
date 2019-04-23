@@ -31,7 +31,8 @@ const config: GameConfig = {
       MainMenuScene,
       GameScene
     ],
-    pixelArt: true
+    antialias: false,
+    roundPixels: true
   };
 
   export class Game extends Phaser.Game {

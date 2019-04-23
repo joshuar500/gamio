@@ -1,11 +1,17 @@
 export class Item extends Phaser.GameObjects.Sprite {
 
+  private currentScene: any;
   private text: any;
+  private itemData : object;
+  private collectible: boolean;
 
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
 
     this.currentScene = params.scene;
+    // this.currentScene.items = this.currentScene.add.group({ runChildUpdate: true });
+    this.itemData = params.itemData ? params.itemData : null;
+    this.collectible = false;
     this.text = null;
 
     // image
@@ -16,15 +22,15 @@ export class Item extends Phaser.GameObjects.Sprite {
     params.scene.physics.world.enable(this);
     this.body.setSize(32, 32);
 
-    // add to scene
-    params.scene.add.existing(this);
-
-    if (params.itemData) {
-      this.setData(params.itemData);
+    if (this.itemData) {
+      this.setData(this.itemData);
       this.setInteractive();
       this.addItemData(params.itemData);
-      this.addItemInputHandler();
+      this.collectible = true;
+      // this.handleInput();
     }
+    // add to scene
+    params.scene.add.existing(this);
   }
 
   addItemData = (itemData) => {
@@ -33,17 +39,25 @@ export class Item extends Phaser.GameObjects.Sprite {
       'Name: ' + this.getData('name'),
       'Level: ' + this.getData('level'),
       'Value: ' + this.getData('value') + ' monies',
-      'Owner: ' + this.getData('playerId')
+      'Owner: ' + this.getData('playerId'),
+      'Date: ' + new Date().getTime().toString()
     ]);
     this.text.setVisible(false);
   }
 
-  addItemInputHandler = () => {
-    this.currentScene.input.on('gameobjectover', function (pointer, gameObject) {
-      if (gameObject.text) gameObject.text.setVisible(true);
-    }, this);
-    this.currentScene.input.on('gameobjectout', function (pointer, gameObject) {
-      if (gameObject.text) gameObject.text.setVisible(false);
+  public collectItemData() {
+    // TODO: implement
+    this.text.setVisible(false);
+    this.text.destroy(true);
+    this.setVisible(false);
+    this.destroy(true);
+  }
+
+  private handleInput() {
+    this.on('pointerdown', function(pointer, gameObject){
+      if (pointer.rightButtonDown()) {
+        this.collectItemData(pointer);
+      }
     }, this);
   }
 }

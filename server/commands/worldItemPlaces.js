@@ -6,6 +6,6 @@ module.exports = function (socket, players, io) {
     } else {
       players[itemData.playerId].worldItemInventory = [itemData];
     }
-    io.emit('worldItemPlacedUpdate', itemData);
+    socket.emit('worldItemPlacedUpdate', itemData);
   });
 }
