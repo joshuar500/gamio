@@ -85,8 +85,8 @@ export class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  addItem(pointer) : void {
-    if (!pointer.rightButtonDown()) {
+  addItem(pointer, gameObject) : void {
+    if (!pointer.rightButtonDown() && !gameObject.length) {
       const itemData = {
         playerId: this.currentScene.player.playerInfo.playerId,
         type: 'flower',

@@ -3,16 +3,17 @@ export class Inventory extends Phaser.GameObjects.Sprite {
     super(params.scene, params.x, params.y, params.key, params.frame);
 
     // image
-    this.setScale(2);
-    this.setOrigin(-0.2, -0.1);
+    this.setScale(5);
+    this.setOrigin(0, 0);
     this.setInteractive();
+    this.setName('Inventory');
 
-    // physics
+    // physics?
     params.scene.physics.world.enable(this);
 
     // now that physics has been added,
     // we can update the physics body
-    this.body.setSize(32, 32);
+    // this.body.setSize(16, 16);
 
     // add to scene
     params.scene.add.existing(this);
@@ -26,6 +27,8 @@ export class Inventory extends Phaser.GameObjects.Sprite {
         gameObject.y = pointer.y;
 
     });
+
+    this.setVisible(false);
 
 
     params.scene.input.keyboard.on('keyup_I', function (event) {

@@ -3,7 +3,7 @@ import { Player } from '../objects/player';
 import { Marker } from '../objects/marker';
 
 import { addOtherPlayers, addPlayer, currentPlayers, disconnected,
-         addEvents, playerMoved, scoreUpdate, starLocation,
+         addEvents, playerMoved, starLocation,
          addInventory, worldObjectPlaced } from './setup/index';
 
 const io = require('socket.io-client');
@@ -18,12 +18,8 @@ export class GameScene extends Phaser.Scene {
   private controls: Phaser.Cameras.Controls.FixedKeyControl;
   private velocity: number;
   private otherPlayers: Phaser.Physics.Arcade.Group;
-  // private items: Phaser.GameObjects.Group;
   private cursors: any;
-  private blueScoreText: any;
-  private redScoreText: any;
   private stats: any;
-  // private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
 
   private currentPlayers: any;
   private addOtherPlayers: any;
@@ -31,11 +27,9 @@ export class GameScene extends Phaser.Scene {
   private disconnected: any;
   private addEvents: any;
   private playerMoved: any;
-  private scoreUpdate: any;
   private starLocation: any;
   private addInventory: any;
   private worldObjectPlaced: any;
-  private keys: any;
 
   constructor() {
     super({
@@ -48,7 +42,6 @@ export class GameScene extends Phaser.Scene {
     this.addInventory = addInventory.bind(this);
     this.addEvents = addEvents.bind(this);
     this.playerMoved = playerMoved.bind(this);
-    // this.scoreUpdate = scoreUpdate.bind(this);
     this.starLocation = starLocation.bind(this);
     this.worldObjectPlaced = worldObjectPlaced.bind(this);
   }
@@ -70,10 +63,6 @@ export class GameScene extends Phaser.Scene {
 
     // add support for keyboard pressing
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    // add scoreboard
-    // this.blueScoreText = this.add.text(16, 16, '', { fontSize: '32px', fill: '#0000FF' });
-    // this.redScoreText = this.add.text(584, 16, '', { fontSize: '32px', fill: '#FF0000' });
 
     // add controls
     this.addControls();
@@ -165,7 +154,6 @@ export class GameScene extends Phaser.Scene {
     this.socket.on('newPlayer', this.addOtherPlayers);
     this.socket.on('playerMoved', this.playerMoved);
     this.socket.on('disconnect', this.disconnected);
-    // this.socket.on('scoreUpdate', this.scoreUpdate);
     this.socket.on('starLocation', this.starLocation);
     this.socket.on('worldItemPlacedUpdate', this.worldObjectPlaced);
   }

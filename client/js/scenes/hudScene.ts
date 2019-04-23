@@ -15,7 +15,6 @@ export class HudScene extends Phaser.Scene {
 
     //  Grab a reference to the Game Scene
     // let ourGame = this.scene.get('GameScene');
-    console.log('hud update');
     
     // add stats
     this.bitmapTexts.push(

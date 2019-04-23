@@ -4,7 +4,6 @@ export * from './currentPlayers';
 export * from './disconnected';
 export * from './inventory';
 export * from './playerMoved';
-export * from './scoreUpdate';
 export * from './starLocation';
 export * from './worldObjectPlaced';
 export * from './addEvents';

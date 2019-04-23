@@ -27,7 +27,6 @@ export class Item extends Phaser.GameObjects.Sprite {
       this.setInteractive();
       this.addItemData(params.itemData);
       this.collectible = true;
-      // this.handleInput();
     }
     // add to scene
     params.scene.add.existing(this);
@@ -51,13 +50,5 @@ export class Item extends Phaser.GameObjects.Sprite {
     this.text.destroy(true);
     this.setVisible(false);
     this.destroy(true);
-  }
-
-  private handleInput() {
-    this.on('pointerdown', function(pointer, gameObject){
-      if (pointer.rightButtonDown()) {
-        this.collectItemData(pointer);
-      }
-    }, this);
   }
 }
