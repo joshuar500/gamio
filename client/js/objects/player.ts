@@ -1,4 +1,6 @@
 import { Item } from "./item";
+import { Equipment } from "./equipment";
+import { Inventory } from "../menu/inventory";
 
 export class Player extends Phaser.GameObjects.Sprite {
   private currentScene: Phaser.Scene;
@@ -6,10 +8,14 @@ export class Player extends Phaser.GameObjects.Sprite {
   private velocity: number;
   public playerInfo: any;
   private currentDir: string;
+  inventory: Inventory | null;
+  equipment = new Equipment();
   private items: Phaser.GameObjects.Group;
 
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
+
+    console.log('this', this);
 
     this.currentScene = params.scene;
     this.playerInfo = params.playerInfo;
@@ -29,6 +35,7 @@ export class Player extends Phaser.GameObjects.Sprite {
     //   this.setTint(0xff0000);
     // }
 
+    this.inventory = null;
     this.items = this.currentScene.add.group({ runChildUpdate: true });
     this.currentScene.input.on('pointerdown', this.addItem, this);
 
@@ -70,6 +77,10 @@ export class Player extends Phaser.GameObjects.Sprite {
       } else {
         this.body.setVelocity(0, 0);
         this.anims.stop();
+      }
+
+      if (this.currentScene.keys.i.isDown && !this.inventory) {
+        this.inventory = new Inventory(this.currentScene, 400, 300, this);
       }
 
       this.handleAnimations(animDir);

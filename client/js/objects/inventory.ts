@@ -1,4 +1,7 @@
 export class Inventory extends Phaser.GameObjects.Sprite {
+
+  private inventory: any;
+
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
 
@@ -13,7 +16,6 @@ export class Inventory extends Phaser.GameObjects.Sprite {
 
     // now that physics has been added,
     // we can update the physics body
-    // this.body.setSize(16, 16);
 
     // add to scene
     params.scene.add.existing(this);

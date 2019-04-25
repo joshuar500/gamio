@@ -71,7 +71,7 @@ export class GameScene extends Phaser.Scene {
     this.addSockets();
 
     // add inventory TODO: move to player.ts
-    this.addInventory();
+    // this.addInventory();
 
     // add events
     this.addEvents();
@@ -136,7 +136,7 @@ export class GameScene extends Phaser.Scene {
       right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
       down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
       i: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I),
-      shiftKey: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+      shiftKey: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT),
     };
   }
 
