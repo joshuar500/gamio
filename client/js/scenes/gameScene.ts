@@ -1,16 +1,15 @@
 import { Player } from '../objects/player';
-// import { Inventory } from '../objects/inventory';
 import { Marker } from '../objects/marker';
 
 import { addOtherPlayers, addPlayer, currentPlayers, disconnected,
          addEvents, playerMoved, starLocation,
-         addInventory, worldObjectPlaced } from './setup/index';
+         worldObjectPlaced } from './setup/index';
 
 const io = require('socket.io-client');
 
 export class GameScene extends Phaser.Scene {
   private socket: SocketIOClient.Emitter;
-  private player: Player;
+  public player: Player;
   private map: Phaser.Tilemaps.Tilemap;
   private groundLayer: Phaser.Tilemaps.DynamicTilemapLayer;
   private collidingLayer: Phaser.Tilemaps.DynamicTilemapLayer;
@@ -18,7 +17,7 @@ export class GameScene extends Phaser.Scene {
   private controls: Phaser.Cameras.Controls.FixedKeyControl;
   private velocity: number;
   private otherPlayers: Phaser.Physics.Arcade.Group;
-  private cursors: any;
+  private cursors: Phaser.Input.Keyboard.CursorKeys;
   private stats: any;
 
   private currentPlayers: any;
@@ -28,7 +27,6 @@ export class GameScene extends Phaser.Scene {
   private addEvents: any;
   private playerMoved: any;
   private starLocation: any;
-  private addInventory: any;
   private worldObjectPlaced: any;
 
   constructor() {
@@ -39,7 +37,6 @@ export class GameScene extends Phaser.Scene {
     this.addPlayer = addPlayer.bind(this);
     this.currentPlayers = currentPlayers.bind(this);
     this.disconnected = disconnected.bind(this);
-    this.addInventory = addInventory.bind(this);
     this.addEvents = addEvents.bind(this);
     this.playerMoved = playerMoved.bind(this);
     this.starLocation = starLocation.bind(this);
@@ -69,9 +66,6 @@ export class GameScene extends Phaser.Scene {
     this.addKeys();
     this.addMarker();
     this.addSockets();
-
-    // add inventory TODO: move to player.ts
-    // this.addInventory();
 
     // add events
     this.addEvents();

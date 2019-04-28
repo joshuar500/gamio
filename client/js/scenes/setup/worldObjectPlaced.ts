@@ -5,8 +5,8 @@ export function worldObjectPlaced(itemData) {
       scene: this,
       x: itemData.x,
       y: itemData.y,
-      frame: 39,
-      key: "desert_sprites",
+      frame: itemData.frame,
+      key: itemData.key,
       itemData: itemData
     })
 }

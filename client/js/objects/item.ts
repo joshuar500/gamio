@@ -46,6 +46,12 @@ export class Item extends Phaser.GameObjects.Sprite {
 
   public collectItemData() {
     // TODO: implement
+    if (typeof this.currentScene.player.items[this.itemData.itemId] === 'undefined') {
+      this.currentScene.player.items[this.itemData.itemId] = this.itemData;
+    } else {
+      this.currentScene.player.items[this.itemData.itemId].count++;
+    }
+    console.log('added item data', this.currentScene.player.items)
     this.text.setVisible(false);
     this.text.destroy(true);
     this.setVisible(false);

@@ -2,6 +2,8 @@ import { MenuStyle } from './interfaces';
 import { Player } from '../objects/player';
 import { InventoryBar } from './inventoryBar';
 import { InventoryStats } from './inventoryStats';
+import { GameScene } from '../scenes/gameScene';
+import { Item } from '../objects/item';
 
 export class Inventory extends Phaser.GameObjects.Container {
   MenuStyle: MenuStyle = {
@@ -15,63 +17,99 @@ export class Inventory extends Phaser.GameObjects.Container {
 
   InventoryList = [];
 
-  inventoryBars: Phaser.GameObjects.Group;
+  inventoryContainer: Phaser.GameObjects.Image;
+  currentScene: GameScene;
 
-  inventoryStats: Phaser.GameObjects.Group;
 
-  constructor(scene: any, x: number, y: number, children: any) {
-    super(scene, x, y, children);
+  constructor(scene: any, x: number, y: number) {
+    super(scene, x, y);
     // this.player = player;
     this.currentScene = scene;
-    this.currentScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J).once('down', () => {
-      this.destroyInventory();
-    });
 
-    // this.game.add.image({ key: 'inventoryContainer' });
-    this.inventory = this.currentScene.add.sprite(200, 300, 'inventoryContainer');
-    this.inventoryBars = this.currentScene.add.group({ key: 'star', frame: 0, repeat: 50, setScale: { x: 0.5, y: 0.5 } });
-    Phaser.Actions.GridAlign(this.inventoryBars.getChildren(), { width: 9, cellWidth: 58, cellHeight: 48, x: 132, y: 148 });
-
-    this.setScale(5);
-    this.setSize(300, 400);
-    // this.setOrigin(0, 0);
+    this.setScale(2);
+    this.setSize(400, 300);
+    this.setAlpha(0.75);
     this.setInteractive();
+    // create inventory container that is an IMAGE (not a GameObject Container [should prob rename])
+    this.inventoryContainer = this.currentScene.add.image(0, 0, 'inventoryContainer');
+    this.inventoryContainer.setScale(3);
+    // this.inventoryContainer.setScale(1);
+    this.inventoryContainer.setOrigin(0);
 
-    this.currentScene.physics.world.enable(this);
+    this.add(this.inventoryContainer);
 
-    // add to scene
-    this.currentScene.add.existing(this);
+    this.addInventorySlots();
+    this.addItemsToInventory();
 
-    // make object draggable
+    // // make object draggable
     scene.input.setDraggable(this);
 
-    scene.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+    // super.add(this.inventory);
+    scene.add.existing(this);
 
-      gameObject.x = pointer.x;
-      gameObject.y = pointer.y;
+    this.handleInput();
 
+    // this.debug();
+  }
+
+  addInventorySlots() {
+    // todo: refactor into another class
+    let row = 0;
+    for (let i = 0; i <= 8; i++) {
+      const slotPosition = this.getSlotPos(i);
+      // add to this container
+      this.add(
+        this.currentScene.add.rectangle(slotPosition.x, slotPosition.y, 32, 32, 0x6666ff).setOrigin(0, 0)
+      );
+    }
+  }
+
+  addItemsToInventory() {
+    // todo: refactor into another class
+    Object.keys(this.currentScene.player.items).map((key, i) => {
+      const slotPosition = this.getSlotPos(i);
+      
+      // add this to this container
+      this.add(
+        new Item({ scene: this.currentScene, ...this.currentScene.player.items[key], x: slotPosition.x, y: slotPosition.y })
+      );
     });
+  }
 
-    // const bar1 = new InventoryBar(this.game, this.x, this.y, this.player, "armor", 4);
-    // const bar2 = new InventoryBar(this.game, bar1.x, bar1.y + bar1.height, this.player, "ring", 4);
-    // const bar3 = new InventoryBar(this.game, bar2.x, bar2.y + bar2.height, this.player, "belt", 4);
-    // const bar4 = new InventoryBar(this.game, bar2.x, bar3.y + bar3.height, this.player, "belt", 4);
-    // this.inventoryBars.add(bar1);
-    // this.inventoryBars.add(bar2);
-    // this.inventoryBars.add(bar3);
-    // this.inventoryBars.add(bar4);
-
-    // this.inventoryStats = this.game.add.group();
-    // const stats = new InventoryStats(this.game, bar1.x + bar1.width, bar1.y, this.player);
-    // this.inventoryStats.add(stats);
-    // console.log('this.inventoryBars', this.inventoryBars);
+  getSlotPos(index) {
+    return {
+      x: (index % 3) * 48 + 26,
+      y: Math.floor(index / 3) * 50 + 50
+    }
   }
 
   destroyInventory() {
     // not sure why but i gotta do all of this
+    // this.inventory.destroy();
     this.currentScene.player.inventory = null;
-    this.inventoryBars.destroy(true);
+    // this.inventoryBars.destroy(true);
     this.destroy(true);
-    console.log('this.game', this.currentScene);
+  }
+
+  handleInput() {
+    this.currentScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J).once('down', () => {
+      this.destroyInventory();
+    });
+
+    this.currentScene.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+      this.x = pointer.x;
+      this.y = pointer.y;
+
+    }, this);
+  }
+
+  debug() {
+    this.bounds1 = this.inventoryContainer.getBounds();
+    this.bounds2 = super.getBounds();
+    this.graphics = this.currentScene.add.graphics();
+    this.graphics.lineStyle(1, 0x0000ff);
+    this.graphics.strokeRectShape(this.bounds1);
+    this.graphics.lineStyle(1, 0xff0000);
+    this.graphics.strokeRectShape(this.bounds2);
   }
 }

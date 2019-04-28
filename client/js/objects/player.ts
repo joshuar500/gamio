@@ -10,7 +10,7 @@ export class Player extends Phaser.GameObjects.Sprite {
   private currentDir: string;
   inventory: Inventory | null;
   equipment = new Equipment();
-  private items: Phaser.GameObjects.Group;
+  public items: object;
 
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
@@ -36,7 +36,7 @@ export class Player extends Phaser.GameObjects.Sprite {
     // }
 
     this.inventory = null;
-    this.items = this.currentScene.add.group({ runChildUpdate: true });
+    this.items = {};
     this.currentScene.input.on('pointerdown', this.addItem, this);
 
     // enable player physics properties so we can move/collide
@@ -80,7 +80,7 @@ export class Player extends Phaser.GameObjects.Sprite {
       }
 
       if (this.currentScene.keys.i.isDown && !this.inventory) {
-        this.inventory = new Inventory(this.currentScene, 400, 300, this);
+        this.inventory = new Inventory(this.currentScene, 100, 100);
       }
 
       this.handleAnimations(animDir);
@@ -99,22 +99,17 @@ export class Player extends Phaser.GameObjects.Sprite {
   addItem(pointer, gameObject) : void {
     if (!pointer.rightButtonDown() && !gameObject.length) {
       const itemData = {
+        itemId: 'desert_flower_39',
         playerId: this.currentScene.player.playerInfo.playerId,
         type: 'flower',
         name: 'cool flower',
         level: 0,
         owner: 'playerId1234',
-        value: 12
+        value: 12,
+        key: 'desert_sprites',
+        frame: 39,
+        count: 1,
       }
-      // const item = new Item({
-      //   scene: this.currentScene,
-      //   x: this.currentScene.marker.snappedWorldPoint.x,
-      //   y: this.currentScene.marker.snappedWorldPoint.y,
-      //   frame: 39,
-      //   key: "desert_sprites",
-      //   itemData: itemData
-      // })
-      // this.items.add(item);
       this.currentScene.socket.emit('worldItemPlaced', { ...itemData, x: this.currentScene.marker.snappedWorldPoint.x, y: this.currentScene.marker.snappedWorldPoint.y });
     }
   }
